@@ -9,11 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:'Quicksand';
-  background:#fff0f5;
-}
+body{margin:0;font-family:'Quicksand';background:#fff0f5;}
 
 header{
   background:#ffc1d6;
@@ -22,19 +18,10 @@ header{
   align-items:center;
   gap:10px;
 }
-
 header img{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  border:3px solid #ff8fab;
+  width:60px;height:60px;border-radius:50%;
 }
-
-h1{
-  font-family:'Pacifico';
-  color:#ff4d88;
-  cursor:pointer;
-}
+h1{font-family:'Pacifico';color:#ff4d88;cursor:pointer;}
 
 .grid{
   padding:15px;
@@ -48,125 +35,108 @@ h1{
   padding:10px;
   border-radius:15px;
   text-align:center;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  box-shadow:0 5px 10px rgba(0,0,0,0.1);
 }
-
-.card img{
-  width:100%;
-  border-radius:10px;
-}
+.card img{width:100%;border-radius:10px;}
 
 .btn{
-  background:#ff8fab;
-  border:none;
-  padding:8px;
-  border-radius:8px;
-  color:#fff;
-  width:100%;
-  margin-top:5px;
+  background:#ff8fab;border:none;padding:8px;border-radius:8px;color:#fff;width:100%;
 }
 
 /* CARRINHO */
 #cartBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#ff4d88;
-  color:#fff;
-  padding:15px;
-  border-radius:50%;
-  font-size:20px;
+  position:fixed;bottom:20px;right:20px;
+  background:#ff4d88;color:#fff;padding:15px;border-radius:50%;
 }
-
 #cartBox{
-  position:fixed;
-  bottom:80px;
-  right:20px;
-  width:260px;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 0 15px rgba(0,0,0,0.2);
-  padding:10px;
-  display:none;
+  position:fixed;bottom:80px;right:20px;
+  width:260px;background:#fff;border-radius:15px;padding:10px;
+  display:none;box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
-
 .itemCart{
-  background:#ffe4ec;
-  margin:5px 0;
-  padding:5px;
-  border-radius:8px;
+  background:#ffe4ec;margin:5px 0;padding:5px;border-radius:8px;
+  display:flex;justify-content:space-between;
 }
 
-.total{
-  font-weight:bold;
-  margin-top:10px;
-}
-
-/* ADMIN */
-#login, #admin{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
+/* LOGIN E ADMIN */
+#login,#admin{
+  display:none;position:fixed;top:50%;left:50%;
   transform:translate(-50%,-50%);
-  background:#fff;
-  padding:20px;
-  border-radius:15px;
-  width:300px;
+  background:#fff;padding:20px;border-radius:15px;width:300px;
+}
+input{width:100%;margin:5px 0;padding:8px;}
+
+.admin-item{
+  background:#ffe4ec;padding:5px;border-radius:8px;margin-top:5px;
 }
 
-input{
-  width:100%;
-  margin:5px 0;
-  padding:8px;
-}
-
+/* FAQ */
+.faq{padding:20px;background:#ffe4ec;}
+.faq-content{display:none;background:#fff;padding:10px;border-radius:8px;}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="https://i.imgur.com/l6Cf6bK.png">
-  <h1 id="title">Encanto em Crochê</h1>
+<img src="https://i.imgur.com/l6Cf6bK.png">
+<h1 id="title">Encanto em Crochê</h1>
 </header>
 
 <div class="grid" id="products"></div>
 
-<!-- BOTÃO CARRINHO -->
-<div id="cartBtn">🛒</div>
-
 <!-- CARRINHO -->
+<div id="cartBtn">🛒</div>
 <div id="cartBox">
-  <h3>Seu Carrinho</h3>
-  <div id="cartItems"></div>
-  <div class="total" id="total"></div>
-  <button class="btn" onclick="finalizar()">Finalizar no WhatsApp</button>
+<h3>Carrinho</h3>
+<div id="cartItems"></div>
+<div id="total"></div>
+<button class="btn" onclick="finalizar()">Finalizar</button>
 </div>
 
 <!-- LOGIN -->
 <div id="login">
-  <h3>🔐 Acesso ADM</h3>
-  <input id="senha" placeholder="Senha">
-  <button onclick="logar()">Entrar</button>
+<h3>🔐 ADM</h3>
+<input id="senha" placeholder="Senha">
+<button onclick="logar()">Entrar</button>
 </div>
 
 <!-- ADMIN -->
 <div id="admin">
-  <h3>Painel ADM</h3>
+<h3>Painel ADM 💖</h3>
 
-  <input id="name" placeholder="Nome">
-  <input id="price" placeholder="Preço">
-  <input id="desc" placeholder="Descrição">
-  <input id="msg" placeholder="Mensagem WhatsApp">
-  <input id="img" placeholder="Imagem URL">
+<input id="name" placeholder="Nome">
+<input id="price" placeholder="Preço">
+<input id="desc" placeholder="Descrição">
+<input id="msg" placeholder="Mensagem WhatsApp">
 
-  <button onclick="save()">Salvar</button>
+<input type="file" id="file">
+<input id="img" placeholder="OU URL da imagem">
+
+<button onclick="add()">Salvar</button>
+<button onclick="fechar()">Fechar</button>
+
+<h4>Produtos</h4>
+<div id="lista"></div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+<h2>❓ FAQ</h2>
+
+<button onclick="toggle(this)">📦 Entrega</button>
+<div class="faq-content">Combinamos pelo WhatsApp 💖</div>
+
+<button onclick="toggle(this)">🧶 Loja</button>
+<div class="faq-content">Produtos artesanais feitos à mão</div>
+
+<button onclick="toggle(this)">💰 Preço</button>
+<div class="faq-content">Entre R$40 e R$300</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBZaqRqe5v7GepCcsR1xQeqVHQJr9n3vnw",
@@ -182,33 +152,47 @@ const db = getFirestore(app);
 
 let products=[];
 let cart=[];
+let editId=null;
 
-const grid = document.getElementById("products");
+const productsDiv=document.getElementById("products");
+const listaDiv=document.getElementById("lista");
 
 onSnapshot(collection(db,"produtos"), snap=>{
   products=[];
   snap.forEach(d=>{
-    products.push(d.data());
+    products.push({...d.data(), id:d.id});
   });
   render();
 });
 
 function render(){
   let html="";
-  products.forEach((p,i)=>{
+  let lista="";
+
+  products.forEach(p=>{
     html+=`
     <div class="card">
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <p>R$ ${p.price}</p>
-      <button class="btn" onclick="addCart(${i})">Adicionar</button>
+      <button class="btn" onclick="addCart('${p.id}')">Adicionar</button>
+    </div>`;
+
+    lista+=`
+    <div class="admin-item">
+      ${p.name}
+      <button onclick="editar('${p.id}')">✏️</button>
+      <button onclick="deletar('${p.id}')">🗑️</button>
     </div>`;
   });
-  grid.innerHTML=html;
+
+  productsDiv.innerHTML=html;
+  listaDiv.innerHTML=lista;
 }
 
-window.addCart=(i)=>{
-  cart.push(products[i]);
+/* CARRINHO */
+window.addCart=(id)=>{
+  cart.push(products.find(x=>x.id==id));
   renderCart();
 }
 
@@ -217,16 +201,16 @@ function renderCart(){
   let total=0;
 
   cart.forEach((p,i)=>{
-    total += Number(p.price);
+    total+=Number(p.price);
     html+=`
     <div class="itemCart">
       ${p.name}
-      <button onclick="removeItem(${i})">❌</button>
+      <span onclick="removeItem(${i})">❌</span>
     </div>`;
   });
 
   cartItems.innerHTML=html;
-  totalDiv.innerText="Total: R$ "+total;
+  total.innerText="Total: R$ "+total;
 }
 
 window.removeItem=(i)=>{
@@ -238,42 +222,89 @@ cartBtn.onclick=()=>{
   cartBox.style.display = cartBox.style.display=="block"?"none":"block";
 }
 
+/* WHATSAPP AUTOMÁTICO */
 window.finalizar=()=>{
-  let msg="Olá, quero comprar:%0A";
+  if(cart.length===0){
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  let msg="🛍️ *Novo Pedido* %0A%0A";
 
   cart.forEach(p=>{
-    msg += "- " + (p.msg || p.name) + "%0A";
+    msg += "• " + (p.msg || p.name) + "%0A";
   });
+
+  msg += "%0A📦 Pedido feito pelo site Encanto em Crochê 💖";
 
   window.open("https://wa.me/55980751104?text="+msg);
 }
+
+/* ADMIN */
+window.add=()=>{
+  let file=document.getElementById("file").files[0];
+
+  if(file){
+    let reader=new FileReader();
+    reader.onload=e=>save(e.target.result);
+    reader.readAsDataURL(file);
+  }else{
+    save(img.value);
+  }
+}
+
+async function save(image){
+  if(editId){
+    await updateDoc(doc(db,"produtos",editId),{
+      name:name.value,price:price.value,desc:desc.value,msg:msg.value,img:image
+    });
+    editId=null;
+  }else{
+    await addDoc(collection(db,"produtos"),{
+      name:name.value,price:price.value,desc:desc.value,msg:msg.value,img:image
+    });
+  }
+
+  name.value="";price.value="";desc.value="";msg.value="";img.value="";
+}
+
+window.editar=(id)=>{
+  let p=products.find(x=>x.id==id);
+  name.value=p.name;
+  price.value=p.price;
+  desc.value=p.desc;
+  msg.value=p.msg;
+  img.value=p.img;
+  editId=id;
+}
+
+window.deletar=async(id)=>{
+  await deleteDoc(doc(db,"produtos",id));
+}
+
+window.fechar=()=> admin.style.display="none";
 
 /* LOGIN */
 let click=0;
 title.onclick=()=>{
   click++;
-  if(click==5){
-    login.style.display="block";
-  }
+  if(click==5) login.style.display="block";
 }
 
 window.logar=()=>{
   if(senha.value==="0107"){
     login.style.display="none";
     admin.style.display="block";
+  }else{
+    alert("Senha errada!");
   }
 }
 
-/* SALVAR */
-window.save=async()=>{
-  await addDoc(collection(db,"produtos"),{
-    name:name.value,
-    price:price.value,
-    desc:desc.value,
-    msg:msg.value,
-    img:img.value
-  });
-};
+/* FAQ */
+window.toggle=(btn)=>{
+  let c=btn.nextElementSibling;
+  c.style.display=c.style.display=="block"?"none":"block";
+}
 </script>
 
 </body>

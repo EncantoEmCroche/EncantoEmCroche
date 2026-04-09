@@ -9,8 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:'Quicksand';background:#fff0f5;}
+body{
+  margin:0;
+  font-family:'Quicksand';
+  background:#fff0f5;
+}
 
+/* HEADER */
 header{
   background:#ffc1d6;
   padding:15px;
@@ -21,58 +26,104 @@ header{
 header img{
   width:60px;height:60px;border-radius:50%;
 }
-h1{font-family:'Pacifico';color:#ff4d88;cursor:pointer;}
+h1{font-family:'Pacifico';color:#ff4d88;}
 
+/* GRID */
 .grid{
-  padding:15px;
+  padding:20px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
 }
 
+/* CARD */
 .card{
   background:#fff;
-  padding:10px;
+  padding:12px;
   border-radius:15px;
   text-align:center;
   box-shadow:0 5px 10px rgba(0,0,0,0.1);
+  border-left:5px solid #ff8fab;
+  transition:0.3s;
+  position:relative;
 }
-.card img{width:100%;border-radius:10px;}
 
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.nome{font-weight:bold;margin:8px 0;}
+.desc{font-size:13px;margin-bottom:8px;}
+.preco{color:#ff4d88;font-weight:bold;margin-bottom:8px;}
+
+/* BOTÃO */
 .btn{
-  background:#ff8fab;border:none;padding:8px;border-radius:8px;color:#fff;width:100%;
+  background:#ff8fab;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  color:#fff;
+  width:100%;
+  text-decoration:none;
+  display:block;
+  font-weight:bold;
 }
 
-/* CARRINHO */
-#cartBtn{
-  position:fixed;bottom:20px;right:20px;
-  background:#ff4d88;color:#fff;padding:15px;border-radius:50%;
-}
-#cartBox{
-  position:fixed;bottom:80px;right:20px;
-  width:260px;background:#fff;border-radius:15px;padding:10px;
-  display:none;box-shadow:0 0 10px rgba(0,0,0,0.2);
-}
-.itemCart{
-  background:#ffe4ec;margin:5px 0;padding:5px;border-radius:8px;
-  display:flex;justify-content:space-between;
-}
-
-/* LOGIN E ADMIN */
-#login,#admin{
-  display:none;position:fixed;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff;padding:20px;border-radius:15px;width:300px;
-}
-input{width:100%;margin:5px 0;padding:8px;}
-
-.admin-item{
-  background:#ffe4ec;padding:5px;border-radius:8px;margin-top:5px;
+/* SELO */
+.novo{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff4d88;
+  color:#fff;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
 }
 
 /* FAQ */
-.faq{padding:20px;background:#ffe4ec;}
-.faq-content{display:none;background:#fff;padding:10px;border-radius:8px;}
+.faq{
+  padding:20px;
+  background:#ffe4ec;
+}
+
+.faq h2{
+  text-align:center;
+  color:#ff4d88;
+}
+
+.faq-btn{
+  width:100%;
+  background:#ff8fab;
+  border:none;
+  padding:12px;
+  margin:5px 0;
+  color:#fff;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.faq-content{
+  display:none;
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* LINKS */
+.link{
+  display:block;
+  margin:5px 0;
+  color:#ff4d88;
+  text-decoration:none;
+  font-weight:bold;
+}
 </style>
 </head>
 
@@ -80,230 +131,63 @@ input{width:100%;margin:5px 0;padding:8px;}
 
 <header>
 <img src="https://i.imgur.com/l6Cf6bK.png">
-<h1 id="title">Encanto em Crochê</h1>
+<h1>Encanto em Crochê</h1>
 </header>
 
-<div class="grid" id="products"></div>
+<div class="grid">
 
-<!-- CARRINHO -->
-<div id="cartBtn">🛒</div>
-<div id="cartBox">
-<h3>Carrinho</h3>
-<div id="cartItems"></div>
-<div id="total"></div>
-<button class="btn" onclick="finalizar()">Finalizar</button>
+<!-- VESTIDO -->
+<div class="card">
+<img src="https://s10.aconvert.com/convert/p3r68-cdx67/ak0ox-9nn9j.png">
+<div class="nome">Vestido Para Bebês</div>
+<div class="desc">Vestido de Crochê (0 a 3 meses) 👶🧶 Feito à mão.</div>
+<div class="preco">💰 R$ 50,00</div>
+<a class="btn" href="https://wa.me/55980751104?text=Quero%20Vestido%20Para%20Bebê">Comprar</a>
 </div>
 
-<!-- LOGIN -->
-<div id="login">
-<h3>🔐 ADM</h3>
-<input id="senha" placeholder="Senha">
-<button onclick="logar()">Entrar</button>
+<!-- SAPATINHO -->
+<div class="card">
+<img src="https://s11.aconvert.com/convert/p3r68-cdx67/uudbs-b28ck.jpg">
+<div class="nome">Sapatinho de Crochê</div>
+<div class="desc">Confortável e delicado para recém-nascidos 👶</div>
+<div class="preco">💰 R$ 30,00</div>
+<a class="btn" href="https://wa.me/55980751104?text=Quero%20Sapatinho%20de%20Crochê">Comprar</a>
 </div>
 
-<!-- ADMIN -->
-<div id="admin">
-<h3>Painel ADM 💖</h3>
+<!-- BIQUÍNI -->
+<div class="card">
+<div class="novo">NOVO</div>
+<img src="https://s11.aconvert.com/convert/p3r68-cdx67/f2r6t-gjrpt.jpg">
+<div class="nome">Biquíni de Crochê</div>
+<div class="desc">Artesanal 🤍 perfeito para praia e piscina.</div>
+<div class="preco">💰 R$ 90,00</div>
+<a class="btn" href="https://wa.me/55980751104?text=Quero%20Biquíni%20de%20Crochê">Comprar</a>
+</div>
 
-<input id="name" placeholder="Nome">
-<input id="price" placeholder="Preço">
-<input id="desc" placeholder="Descrição">
-<input id="msg" placeholder="Mensagem WhatsApp">
-
-<input type="file" id="file">
-<input id="img" placeholder="OU URL da imagem">
-
-<button onclick="add()">Salvar</button>
-<button onclick="fechar()">Fechar</button>
-
-<h4>Produtos</h4>
-<div id="lista"></div>
 </div>
 
 <!-- FAQ -->
 <div class="faq">
-<h2>❓ FAQ</h2>
+<h2>❓ FAQ & Contato</h2>
 
-<button onclick="toggle(this)">📦 Entrega</button>
+<button class="faq-btn" onclick="toggle(this)">📦 Entrega</button>
 <div class="faq-content">Combinamos pelo WhatsApp 💖</div>
 
-<button onclick="toggle(this)">🧶 Loja</button>
-<div class="faq-content">Produtos artesanais feitos à mão</div>
-
-<button onclick="toggle(this)">💰 Preço</button>
-<div class="faq-content">Entre R$40 e R$300</div>
+<button class="faq-btn" onclick="toggle(this)">📱 Redes Sociais</button>
+<div class="faq-content">
+<a class="link" href="https://wa.me/55980751104">💬 WhatsApp</a>
+<a class="link" href="https://www.instagram.com/francy.encantosdecroche?igsh=cGttYW1rMWVrenl1" target="_blank">📸 Instagram</a>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<button class="faq-btn" onclick="toggle(this)">💰 Preços</button>
+<div class="faq-content">Valores variam conforme o produto</div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBZaqRqe5v7GepCcsR1xQeqVHQJr9n3vnw",
-  authDomain: "encanto-croche.firebaseapp.com",
-  projectId: "encanto-croche",
-  storageBucket: "encanto-croche.firebasestorage.app",
-  messagingSenderId: "608988750569",
-  appId: "1:608988750569:web:04c95d0c4dc80bd2f74678"
-};
+</div>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-let products=[];
-let cart=[];
-let editId=null;
-
-const productsDiv=document.getElementById("products");
-const listaDiv=document.getElementById("lista");
-
-onSnapshot(collection(db,"produtos"), snap=>{
-  products=[];
-  snap.forEach(d=>{
-    products.push({...d.data(), id:d.id});
-  });
-  render();
-});
-
-function render(){
-  let html="";
-  let lista="";
-
-  products.forEach(p=>{
-    html+=`
-    <div class="card">
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <p>R$ ${p.price}</p>
-      <button class="btn" onclick="addCart('${p.id}')">Adicionar</button>
-    </div>`;
-
-    lista+=`
-    <div class="admin-item">
-      ${p.name}
-      <button onclick="editar('${p.id}')">✏️</button>
-      <button onclick="deletar('${p.id}')">🗑️</button>
-    </div>`;
-  });
-
-  productsDiv.innerHTML=html;
-  listaDiv.innerHTML=lista;
-}
-
-/* CARRINHO */
-window.addCart=(id)=>{
-  cart.push(products.find(x=>x.id==id));
-  renderCart();
-}
-
-function renderCart(){
-  let html="";
-  let total=0;
-
-  cart.forEach((p,i)=>{
-    total+=Number(p.price);
-    html+=`
-    <div class="itemCart">
-      ${p.name}
-      <span onclick="removeItem(${i})">❌</span>
-    </div>`;
-  });
-
-  cartItems.innerHTML=html;
-  total.innerText="Total: R$ "+total;
-}
-
-window.removeItem=(i)=>{
-  cart.splice(i,1);
-  renderCart();
-}
-
-cartBtn.onclick=()=>{
-  cartBox.style.display = cartBox.style.display=="block"?"none":"block";
-}
-
-/* WHATSAPP AUTOMÁTICO */
-window.finalizar=()=>{
-  if(cart.length===0){
-    alert("Carrinho vazio!");
-    return;
-  }
-
-  let msg="🛍️ *Novo Pedido* %0A%0A";
-
-  cart.forEach(p=>{
-    msg += "• " + (p.msg || p.name) + "%0A";
-  });
-
-  msg += "%0A📦 Pedido feito pelo site Encanto em Crochê 💖";
-
-  window.open("https://wa.me/55980751104?text="+msg);
-}
-
-/* ADMIN */
-window.add=()=>{
-  let file=document.getElementById("file").files[0];
-
-  if(file){
-    let reader=new FileReader();
-    reader.onload=e=>save(e.target.result);
-    reader.readAsDataURL(file);
-  }else{
-    save(img.value);
-  }
-}
-
-async function save(image){
-  if(editId){
-    await updateDoc(doc(db,"produtos",editId),{
-      name:name.value,price:price.value,desc:desc.value,msg:msg.value,img:image
-    });
-    editId=null;
-  }else{
-    await addDoc(collection(db,"produtos"),{
-      name:name.value,price:price.value,desc:desc.value,msg:msg.value,img:image
-    });
-  }
-
-  name.value="";price.value="";desc.value="";msg.value="";img.value="";
-}
-
-window.editar=(id)=>{
-  let p=products.find(x=>x.id==id);
-  name.value=p.name;
-  price.value=p.price;
-  desc.value=p.desc;
-  msg.value=p.msg;
-  img.value=p.img;
-  editId=id;
-}
-
-window.deletar=async(id)=>{
-  await deleteDoc(doc(db,"produtos",id));
-}
-
-window.fechar=()=> admin.style.display="none";
-
-/* LOGIN */
-let click=0;
-title.onclick=()=>{
-  click++;
-  if(click==5) login.style.display="block";
-}
-
-window.logar=()=>{
-  if(senha.value==="0107"){
-    login.style.display="none";
-    admin.style.display="block";
-  }else{
-    alert("Senha errada!");
-  }
-}
-
-/* FAQ */
-window.toggle=(btn)=>{
-  let c=btn.nextElementSibling;
-  c.style.display=c.style.display=="block"?"none":"block";
+<script>
+function toggle(btn){
+  let c = btn.nextElementSibling;
+  c.style.display = c.style.display=="block" ? "none" : "block";
 }
 </script>
 

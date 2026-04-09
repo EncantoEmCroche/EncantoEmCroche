@@ -11,7 +11,7 @@
 <style>
 body{
   margin:0;
-  font-family:'Quicksand', sans-serif;
+  font-family:'Quicksand';
   background:#fdf6f9;
   color:#ff4d88;
 }
@@ -67,6 +67,12 @@ button{
   margin:2px;
 }
 
+.admin-btn{
+  background:#333;
+}
+
+.close{ background:red; }
+
 #cart{
   position:fixed;
   bottom:10px;
@@ -105,9 +111,6 @@ input, textarea{
   padding:8px;
 }
 
-.close{ background:red; }
-
-/* FAQ */
 .faq{
   background:#ffe4ec;
   padding:20px;
@@ -116,7 +119,6 @@ input, textarea{
 
 .faq-btn{
   width:100%;
-  text-align:left;
   background:#ff8fab;
   padding:10px;
   border-radius:8px;
@@ -159,15 +161,13 @@ footer{
   <button onclick="finish()">Finalizar</button>
 </div>
 
-<!-- ADMIN -->
 <div id="admin">
   <h3>Painel ADM</h3>
 
   <input id="name" placeholder="Nome do produto">
   <input id="price" placeholder="Preço">
   <textarea id="desc" placeholder="Descrição"></textarea>
-
-  <input id="msg" placeholder="Mensagem WhatsApp (ex: Quero uma roupa de bebê)">
+  <input id="msg" placeholder="Mensagem WhatsApp">
 
   <input type="file" id="file">
   <input id="img" placeholder="OU URL da imagem">
@@ -176,31 +176,22 @@ footer{
   <button class="close" onclick="closeAdmin()">Fechar</button>
 </div>
 
-<!-- FAQ -->
 <div class="faq">
-  <h2>❓ Perguntas Frequentes</h2>
+  <h2>❓ FAQ</h2>
+  <button class="faq-btn">Entrega?</button>
+  <div class="faq-content">Combinado via WhatsApp</div>
 
-  <button class="faq-btn">📦 Como funciona a entrega?</button>
-  <div class="faq-content">Combinamos tudo pelo WhatsApp 💖</div>
-
-  <button class="faq-btn">🧶 Quando foi criada?</button>
-  <div class="faq-content">Criada para trazer peças artesanais únicas.</div>
-
-  <button class="faq-btn">💰 Preço médio?</button>
-  <div class="faq-content">Entre R$40 e R$300.</div>
-
-  <button class="faq-btn">📞 Como comprar?</button>
-  <div class="faq-content">Adicione ao carrinho e finalize no WhatsApp.</div>
+  <button class="faq-btn">Preço?</button>
+  <div class="faq-content">R$40 a R$300</div>
 </div>
 
-<footer>
-  © Encanto em Crochê 💖
-</footer>
+<footer>© Encanto em Crochê 💖</footer>
 
 <script>
 let products = JSON.parse(localStorage.getItem("produtos")) || [];
 let cart = [];
 let editIndex = -1;
+let isAdmin = false;
 
 const fileInput = document.getElementById("file");
 
@@ -214,14 +205,19 @@ function render(){
     html+=`
     <div class="card">
       <img src="${p.img}">
-      <h4>${p.name || "Sem nome"}</h4>
-      <p>${p.desc || ""}</p>
+      <h4>${p.name}</h4>
+      <p>${p.desc}</p>
       <p><b>R$ ${p.price}</b></p>
+
       <button onclick="addCart(${i})">Adicionar</button>
-      <button onclick="editProduct(${i})">Editar</button>
-      <button onclick="deleteProduct(${i})">Excluir</button>
+
+      ${isAdmin ? `
+        <button class="admin-btn" onclick="editProduct(${i})">Editar</button>
+        <button class="admin-btn" onclick="deleteProduct(${i})">Excluir</button>
+      ` : ``}
     </div>`;
   });
+
   document.getElementById("products").innerHTML = html;
 }
 
@@ -233,16 +229,16 @@ function addProduct(){
     reader.onload = e => saveData(e.target.result);
     reader.readAsDataURL(file);
   }else{
-    saveData(document.getElementById("img").value);
+    saveData(img.value);
   }
 }
 
 function saveData(image){
   let p = {
-    name: document.getElementById("name").value,
-    price: document.getElementById("price").value,
-    desc: document.getElementById("desc").value,
-    msg: document.getElementById("msg").value,
+    name: name.value,
+    price: price.value,
+    desc: desc.value,
+    msg: msg.value,
     img: image
   };
 
@@ -264,9 +260,8 @@ function editProduct(i){
   price.value = p.price;
   desc.value = p.desc;
   img.value = p.img;
-  msg.value = p.msg || "";
+  msg.value = p.msg;
   editIndex = i;
-  document.getElementById("admin").style.display="block";
 }
 
 function deleteProduct(i){
@@ -294,46 +289,44 @@ function renderCart(){
   cart.forEach(p=>{
     html+=`<p>${p.name}</p>`;
   });
-  document.getElementById("cartItems").innerHTML = html;
+  cartItems.innerHTML = html;
 }
 
-document.getElementById("cart").onclick=()=>{
-  let box=document.getElementById("cartBox");
-  box.style.display = box.style.display=="block"?"none":"block";
+cart.onclick=()=>{
+  cartBox.style.display = cartBox.style.display=="block"?"none":"block";
 }
 
 function finish(){
-  let msg="Olá, quero comprar:%0A";
+  let msgText="Olá, quero comprar:%0A";
 
   cart.forEach(p=>{
-    if(p.msg){
-      msg += "- " + p.msg + "%0A";
-    }else{
-      msg += "- " + p.name + " R$" + p.price + "%0A";
-    }
+    msgText += "- " + (p.msg || p.name) + "%0A";
   });
 
-  window.open(`https://wa.me/55980751104?text=${msg}`);
+  window.open(`https://wa.me/55980751104?text=${msgText}`);
 }
 
 function closeAdmin(){
-  document.getElementById("admin").style.display="none";
+  admin.style.display="none";
+  isAdmin=false;
+  render();
 }
 
 let click=0;
-document.getElementById("title").onclick=()=>{
+title.onclick=()=>{
   click++;
   if(click==5){
-    document.getElementById("admin").style.display="block";
+    admin.style.display="block";
+    isAdmin=true;
+    render();
   }
 }
 
 /* FAQ */
 document.querySelectorAll(".faq-btn").forEach(btn=>{
   btn.onclick = ()=>{
-    let content = btn.nextElementSibling;
-    content.style.display =
-      content.style.display === "block" ? "none" : "block";
+    let c = btn.nextElementSibling;
+    c.style.display = c.style.display=="block"?"none":"block";
   }
 });
 

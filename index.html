@@ -3,32 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Encanto em Crochê</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:'Quicksand';
-  background:#fff0f5;
-}
-
-/* HEADER */
-header{
-  background:#ffc1d6;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-header img{
-  width:60px;height:60px;border-radius:50%;
-}
+body{margin:0;font-family:'Quicksand';background:#fff0f5;}
+header{background:#ffc1d6;padding:15px;display:flex;align-items:center;gap:10px;}
+header img{width:60px;height:60px;border-radius:50%;}
 h1{font-family:'Pacifico';color:#ff4d88;}
 
-/* GRID */
 .grid{
   padding:20px;
   display:grid;
@@ -36,7 +20,6 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   gap:20px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   padding:12px;
@@ -44,24 +27,13 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   text-align:center;
   box-shadow:0 5px 10px rgba(0,0,0,0.1);
   border-left:5px solid #ff8fab;
-  transition:0.3s;
   position:relative;
 }
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.card img{
-  width:100%;
-  border-radius:10px;
-}
-
+.card img{width:100%;border-radius:10px;}
 .nome{font-weight:bold;margin:8px 0;}
 .desc{font-size:13px;margin-bottom:8px;}
 .preco{color:#ff4d88;font-weight:bold;margin-bottom:8px;}
 
-/* BOTÃO */
 .btn{
   background:#ff8fab;
   border:none;
@@ -69,12 +41,10 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   border-radius:10px;
   color:#fff;
   width:100%;
-  text-decoration:none;
-  display:block;
   font-weight:bold;
+  cursor:pointer;
 }
 
-/* SELO */
 .novo{
   position:absolute;
   top:10px;
@@ -86,17 +56,87 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   font-size:12px;
 }
 
+/* BOTÃO */
+.cart-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#ff4d88;
+  color:#fff;
+  border:none;
+  padding:15px;
+  border-radius:50%;
+  font-size:18px;
+}
+
+.badge{
+  background:red;
+  border-radius:50%;
+  padding:3px 7px;
+  font-size:12px;
+  position:absolute;
+  top:-5px;
+  right:-5px;
+}
+
+/* CARRINHO */
+.cart{
+  position:fixed;
+  right:-100%;
+  top:0;
+  width:320px;
+  height:100%;
+  background:#ffc1d6;
+  padding:15px;
+  transition:0.3s;
+  overflow:auto;
+}
+.cart.active{right:0;}
+
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:red;
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:30px;
+  height:30px;
+}
+
+.cart-item{
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.cart-item img{width:50px;height:50px;border-radius:10px;}
+
+.remove{
+  background:red;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  padding:5px;
+}
+
+.finalizar{
+  width:100%;
+  background:#ff4d88;
+  border:none;
+  padding:12px;
+  color:#fff;
+  border-radius:10px;
+  font-weight:bold;
+}
+
 /* FAQ */
-.faq{
-  padding:20px;
-  background:#ffe4ec;
-}
-
-.faq h2{
-  text-align:center;
-  color:#ff4d88;
-}
-
+.faq{padding:20px;background:#ffe4ec;}
+.faq h2{text-align:center;color:#ff4d88;}
 .faq-btn{
   width:100%;
   background:#ff8fab;
@@ -107,7 +147,6 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   border-radius:10px;
   font-weight:bold;
 }
-
 .faq-content{
   display:none;
   background:#fff;
@@ -115,8 +154,6 @@ h1{font-family:'Pacifico';color:#ff4d88;}
   border-radius:10px;
   margin-bottom:10px;
 }
-
-/* LINKS */
 .link{
   display:block;
   margin:5px 0;
@@ -136,67 +173,72 @@ h1{font-family:'Pacifico';color:#ff4d88;}
 
 <div class="grid">
 
-<!-- VESTIDO -->
 <div class="card">
 <img src="https://i.imgur.com/gMdA8Xp.jpg">
 <div class="nome">Vestido Para Bebês</div>
-<div class="desc">Vestido de Crochê (0 a 3 meses) 👶🧶 Feito à mão.</div>
+<div class="desc">Vestido de crochê artesanal 👶🧶 feito à mão com muito carinho, ideal para recém-nascidos. Confortável e delicado.</div>
 <div class="preco">💰 R$ 50,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Vestido%20Para%20Bebê">Comprar</a>
+<button class="btn" onclick="add('Vestido Para Bebês','https://i.imgur.com/gMdA8Xp.jpg')">Adicionar</button>
 </div>
 
-<!-- SAPATINHO -->
 <div class="card">
 <img src="https://i.imgur.com/T4GbWC8.jpg">
 <div class="nome">Sapatinho de Crochê</div>
-<div class="desc">Confortável e delicado para recém-nascidos 👶</div>
+<div class="desc">Sapatinho macio e confortável 👶💖 ideal para manter os pezinhos quentinhos com estilo.</div>
 <div class="preco">💰 R$ 30,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Sapatinho%20de%20Crochê">Comprar</a>
+<button class="btn" onclick="add('Sapatinho de Crochê','https://i.imgur.com/T4GbWC8.jpg')">Adicionar</button>
 </div>
 
-<!-- BIQUÍNI -->
 <div class="card">
 <div class="novo">NOVO</div>
 <img src="https://i.imgur.com/BE9izz5.jpg">
 <div class="nome">Biquíni de Crochê</div>
-<div class="desc">Artesanal 🤍 perfeito para praia e piscina.</div>
+<div class="desc">Biquíni artesanal 🤍✨ perfeito para praia e piscina, com estilo único e acabamento delicado.</div>
 <div class="preco">💰 R$ 90,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Biquíni%20de%20Crochê">Comprar</a>
+<button class="btn" onclick="add('Biquíni de Crochê','https://i.imgur.com/BE9izz5.jpg')">Adicionar</button>
 </div>
 
-</div>
-  
-  <!-- BANDANA -->
 <div class="card">
 <div class="novo">NOVO</div>
 <img src="https://i.imgur.com/C07Qb5b.jpg">
 <div class="nome">Bandana de Crochê</div>
-<div class="desc">Bandana de crochê artesanal 🧶💖 delicada, confortável e perfeita para compor looks estilosos no dia a dia.</div>
+<div class="desc">Bandana estilosa 🧶💖 perfeita para compor looks modernos com charme e personalidade.</div>
 <div class="preco">💰 R$ 45,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Bandana%20de%20Crochê">Comprar</a>
+<button class="btn" onclick="add('Bandana de Crochê','https://i.imgur.com/C07Qb5b.jpg')">Adicionar</button>
 </div>
 
-  <!-- SUPLAR -->
 <div class="card">
 <div class="novo">NOVO</div>
 <img src="https://i.imgur.com/R56ngwz.jpg">
-<div class="nome">Kit Suplar de Crochê (4 unidades)</div>
-<div class="desc">Kit com 4 peças de suplar em crochê 🧶✨ ideal para deixar sua mesa posta mais elegante e charmosa.</div>
+<div class="nome">Kit Suplar (4 unidades)</div>
+<div class="desc">Kit com 4 peças 🧶✨ ideal para deixar sua mesa elegante e sofisticada.</div>
 <div class="preco">💰 R$ 60,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Kit%20Suplar%20de%20Crochê">Comprar</a>
+<button class="btn" onclick="add('Kit Suplar','https://i.imgur.com/R56ngwz.jpg')">Adicionar</button>
 </div>
-  
-<!-- PORTA COPO -->
+
 <div class="card">
 <div class="novo">NOVO</div>
 <img src="https://i.imgur.com/engz2KQ.jpg">
-<div class="nome">Kit Porta Copo de Crochê (4 unidades)</div>
-<div class="desc">Kit com 4 porta copos em crochê 🧶💖 perfeito para proteger sua mesa com charme e delicadeza.</div>
+<div class="nome">Kit Porta Copo (4 unidades)</div>
+<div class="desc">Proteção e charme 💖 perfeito para decorar e proteger sua mesa.</div>
 <div class="preco">💰 R$ 25,00</div>
-<a class="btn" href="https://wa.me/5591980751104?text=Quero%20Kit%20Porta%20Copo%20de%20Crochê">Comprar</a>
+<button class="btn" onclick="add('Porta Copo','https://i.imgur.com/engz2KQ.jpg')">Adicionar</button>
 </div>
-  
-<!-- FAQ -->
+
+</div>
+
+<button class="cart-btn" onclick="toggleCart()">
+🛒 <span id="count" class="badge">0</span>
+</button>
+
+<div class="cart" id="cart">
+<button class="close-btn" onclick="toggleCart()">✖</button>
+<h2>Seu Carrinho</h2>
+<div id="items"></div>
+<p id="empty">Carrinho vazio 🛒</p>
+<button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
+
 <div class="faq">
 <h2>❓ FAQ & Contato</h2>
 
@@ -205,8 +247,8 @@ h1{font-family:'Pacifico';color:#ff4d88;}
 
 <button class="faq-btn" onclick="toggle(this)">📱 Redes Sociais</button>
 <div class="faq-content">
-<a class="link" href="https://wa.me/55919980751104">💬 WhatsApp</a>
-<a class="link" href="https://www.instagram.com/francy.encantosdecroche?igsh=cGttYW1rMWVrenl1" target="_blank">📸 Instagram</a>
+<a class="link" href="https://wa.me/5591980751104">💬 WhatsApp</a>
+<a class="link" href="https://www.instagram.com/francy.encantosdecroche" target="_blank">📸 Instagram</a>
 </div>
 
 <button class="faq-btn" onclick="toggle(this)">💰 Preços</button>
@@ -219,7 +261,54 @@ function toggle(btn){
   let c = btn.nextElementSibling;
   c.style.display = c.style.display=="block" ? "none" : "block";
 }
+
+let cart = [];
+
+function add(nome,img){
+  cart.push({nome,img});
+  render();
+}
+
+function render(){
+  let div = document.getElementById('items');
+  let empty = document.getElementById('empty');
+  
+  div.innerHTML = '';
+
+  if(cart.length === 0){
+    empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none';
+  }
+
+  cart.forEach((item,i)=>{
+    div.innerHTML += `
+    <div class="cart-item">
+      <img src="${item.img}">
+      <span>${item.nome}</span>
+      <button class="remove" onclick="removeItem(${i})">X</button>
+    </div>`;
+  });
+
+  document.getElementById('count').innerText = cart.length;
+}
+
+function removeItem(i){
+  cart.splice(i,1);
+  render();
+}
+
+function finalizar(){
+  if(cart.length==0){alert('Carrinho vazio');return;}
+  
+  let msg = cart.map(p=>p.nome).join(' + ');
+  window.open(`https://wa.me/5591980751104?text=Quero ${msg}`);
+}
+
+function toggleCart(){
+  document.getElementById('cart').classList.toggle('active');
+}
 </script>
 
 </body>
-</html>
+    </html>
